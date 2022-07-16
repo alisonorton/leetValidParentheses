@@ -15,17 +15,16 @@ class Solution {
                    Character.compare(s.charAt(j), ')')==0){
                     paired = true;
                     
-                    System.out.println(s.charAt(i));
-                    System.out.println(s.charAt(j));
+                    // System.out.println(s.charAt(i));
+                   // System.out.println(s.charAt(j));
                     i++;
                     j++;
-                    System.out.println("parenth " + paired);
                 }
                 else if(Character.compare(s.charAt(i), '{')==0 &&
                    Character.compare(s.charAt(j), '}')==0){
                     paired = true;
-                    System.out.println(s.charAt(i));
-                    System.out.println(s.charAt(j));
+                  // System.out.println(s.charAt(i));
+                   // System.out.println(s.charAt(j));
                     i++;
                     j++;
                     System.out.println("brace " + paired);
@@ -33,10 +32,39 @@ class Solution {
                 else if(Character.compare(s.charAt(i), '[')==0 &&
                    Character.compare(s.charAt(j), ']')==0){
                     paired = true;
-                    System.out.println(s.charAt(i));
-                    System.out.println(s.charAt(j));
+                   // System.out.println(s.charAt(i));
+                   // System.out.println(s.charAt(j));
                     i++;
                     j++;
+                }
+                else{
+                    paired = false;
+                }
+            }
+        }
+        
+        for(int i = 0; i < s.length()/2; i++){
+            for(int j = s.length()-1; j > s.length()/2; j--){
+                if(Character.compare(s.charAt(i), '(')==0 &&
+                   Character.compare(s.charAt(j), ')')==0){
+                    paired = true;
+                    
+                   System.out.println(s.charAt(i));
+                   System.out.println(s.charAt(j));
+                    System.out.println("parenth " + paired);
+                }
+                else if(Character.compare(s.charAt(i), '{')==0 &&
+                   Character.compare(s.charAt(j), '}')==0){
+                    paired = true;
+                    System.out.println(s.charAt(i));
+                    System.out.println(s.charAt(j));
+                    System.out.println("brace " + paired);
+                }
+                else if(Character.compare(s.charAt(i), '[')==0 &&
+                   Character.compare(s.charAt(j), ']')==0){
+                    paired = true;
+                   System.out.println(s.charAt(i));
+                   System.out.println(s.charAt(j));
                     
                     System.out.println("bracket " + paired);
                 }
@@ -44,7 +72,11 @@ class Solution {
                     paired = false;
                 }
             }
+
         }
+
+        //if paired is false that means we need to run the other loop
+        
         System.out.println("out of loop " + paired);
         
         return paired;
