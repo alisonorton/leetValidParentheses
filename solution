@@ -8,6 +8,8 @@ class Solution {
         //loop through unthil halfway from the begining of the string
         //loop through until halfway from the end of the string
         //This is just a simple change in the loop statements
+        if(s.length() >= 2){
+            
         
         for(int i = 0; i < s.length(); i++){
             for(int j = 1; j < s.length(); j++){
@@ -44,7 +46,7 @@ class Solution {
         }
         
         for(int i = 0; i < s.length()/2; i++){
-            for(int j = s.length()-1; j > s.length()/2; j--){
+            for(int j = s.length()-1; j >= s.length()/2; j--){
                 if(Character.compare(s.charAt(i), '(')==0 &&
                    Character.compare(s.charAt(j), ')')==0){
                     paired = true;
@@ -74,6 +76,10 @@ class Solution {
             }
 
         }
+    }
+        else{
+            paired = false;
+        }
 
         //if paired is false that means we need to run the other loop
         
@@ -81,4 +87,4 @@ class Solution {
         
         return paired;
     }
-}
+}*/
