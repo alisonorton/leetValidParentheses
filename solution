@@ -1,90 +1,39 @@
 class Solution {
     public boolean isValid(String s) {
-        Boolean paired = true;
+        HashMap<Character, Character> parenth = new HashMap<>();
         
-        //if set has { and }  both parentheses
-        //if set has () OR if it's {([])}
+        /*We want to add the keys and values in this order so we can
+        * put the first parentheses in a stack and as we pop them off
+        * check them against the map's values when we check the keys
+        */
+        parenth.put(')', '(');
+        parenth.put('}', '{');
+        parenth.put(']', '[');
         
-        //loop through unthil halfway from the begining of the string
-        //loop through until halfway from the end of the string
-        //This is just a simple change in the loop statements
-        if(s.length() >= 2){
-            
+        //This stack is where we'll put chars that aren't map keys
+        Stack<Character> compare = new Stack<>();
         
         for(int i = 0; i < s.length(); i++){
-            for(int j = 1; j < s.length(); j++){
-                if(Character.compare(s.charAt(i), '(')==0 &&
-                   Character.compare(s.charAt(j), ')')==0){
-                    paired = true;
-                    
-                    // System.out.println(s.charAt(i));
-                   // System.out.println(s.charAt(j));
-                    i++;
-                    j++;
-                }
-                else if(Character.compare(s.charAt(i), '{')==0 &&
-                   Character.compare(s.charAt(j), '}')==0){
-                    paired = true;
-                  // System.out.println(s.charAt(i));
-                   // System.out.println(s.charAt(j));
-                    i++;
-                    j++;
-                    System.out.println("brace " + paired);
-                }
-                else if(Character.compare(s.charAt(i), '[')==0 &&
-                   Character.compare(s.charAt(j), ']')==0){
-                    paired = true;
-                   // System.out.println(s.charAt(i));
-                   // System.out.println(s.charAt(j));
-                    i++;
-                    j++;
-                }
-                else{
-                    paired = false;
+            //dealimg with one char at a time
+            char temp = s.charAt(i);
+            //Is this char contained as a key in our map
+            if(parenth.containsKey(temp)){
+                /*If it is, check to see if compare is empty. If it is, return false.
+                * If compare is NOT empty, pop off the top and compare it to the value
+                * contained at the key temp. If they aren't equal the parentheses don't match
+                * so return false
+                */
+                if(compare.isEmpty() || compare.pop() != parenth.get(temp)){
+                    return false;
                 }
             }
-        }
-        
-        for(int i = 0; i < s.length()/2; i++){
-            for(int j = s.length()-1; j >= s.length()/2; j--){
-                if(Character.compare(s.charAt(i), '(')==0 &&
-                   Character.compare(s.charAt(j), ')')==0){
-                    paired = true;
-                    
-                   System.out.println(s.charAt(i));
-                   System.out.println(s.charAt(j));
-                    System.out.println("parenth " + paired);
-                }
-                else if(Character.compare(s.charAt(i), '{')==0 &&
-                   Character.compare(s.charAt(j), '}')==0){
-                    paired = true;
-                    System.out.println(s.charAt(i));
-                    System.out.println(s.charAt(j));
-                    System.out.println("brace " + paired);
-                }
-                else if(Character.compare(s.charAt(i), '[')==0 &&
-                   Character.compare(s.charAt(j), ']')==0){
-                    paired = true;
-                   System.out.println(s.charAt(i));
-                   System.out.println(s.charAt(j));
-                    
-                    System.out.println("bracket " + paired);
-                }
-                else{
-                    paired = false;
-                }
+            else{
+                //If the map does NOT contain that key add it to the stack
+                compare.push(temp);
             }
-
         }
+        //If the stack is empty then all the parentheses matched
+        //If the stack is NOT empty the parentheses didn't match
+        return compare.isEmpty();
     }
-        else{
-            paired = false;
-        }
-
-        //if paired is false that means we need to run the other loop
-        
-        System.out.println("out of loop " + paired);
-        
-        return paired;
-    }
-}*/
+}
